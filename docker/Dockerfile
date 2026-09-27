@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     qt6-base-dev \
     && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /workspaces/isaac-ros2-mobile-manipulator
+WORKDIR /workspaces/gazebo-ros2-mobile-manipulator
 
 COPY ros2_ws/src ros2_ws/src
 
