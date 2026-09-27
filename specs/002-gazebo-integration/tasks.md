@@ -10,8 +10,8 @@
 
 **Purpose**: Establish the Gazebo/Harmonic workspace baseline and shared execution assumptions.
 
-- [ ] T001 Create the required ROS package layout and verify the active package boundaries in `ros2_ws/src/robot_sim_bringup/`, `ros2_ws/src/navigation_evaluation/`, `ros2_ws/src/sensor_fault_injection/`, and `ros2_ws/src/diagnostics_ui/`
-- [ ] T002 [P] Update package manifests for Gazebo Harmonic, ROS 2 Jazzy, Nav2, and Qt dependencies in `ros2_ws/src/robot_sim_bringup/package.xml`, `ros2_ws/src/navigation_evaluation/package.xml`, `ros2_ws/src/sensor_fault_injection/package.xml`, and `ros2_ws/src/diagnostics_ui/package.xml`
+- [x] T001 Create the required ROS package layout and verify the active package boundaries in `ros2_ws/src/robot_sim_bringup/`, `ros2_ws/src/navigation_evaluation/`, `ros2_ws/src/sensor_fault_injection/`, and `ros2_ws/src/diagnostics_ui/`
+- [x] T002 [P] Update package manifests for Gazebo Harmonic, ROS 2 Jazzy, Nav2, and Qt dependencies in `ros2_ws/src/robot_sim_bringup/package.xml`, `ros2_ws/src/navigation_evaluation/package.xml`, `ros2_ws/src/sensor_fault_injection/package.xml`, and `ros2_ws/src/diagnostics_ui/package.xml`
 - [ ] T003 [P] Capture the supported low-resource execution profile and setup commands in `specs/002-gazebo-integration/quickstart.md` and `specs/002-gazebo-integration/research.md`
 
 ---
@@ -21,8 +21,8 @@
 **Purpose**: Establish the core Gazebo world, bridge, readiness, and metrics contracts before any story-specific implementation.
 
 - [ ] T004 Define the Gazebo execution profile schema and validation rules in `ros2_ws/src/navigation_evaluation/config/scenarios/` and `ros2_ws/src/robot_sim_bringup/config/`
-- [ ] T005 [P] Create the low-complexity robot model, sensor frames, and world assets in `ros2_ws/src/robot_sim_bringup/urdf/` and `ros2_ws/src/robot_sim_bringup/worlds/`
-- [ ] T006 [P] Add the headless server-only launch and `ros_gz_bridge` YAML configuration in `ros2_ws/src/robot_sim_bringup/launch/` and `ros2_ws/src/robot_sim_bringup/config/ros_gz_bridge.yaml`
+- [x] T005 [P] Create the low-complexity robot model, sensor frames, and world assets in `ros2_ws/src/robot_sim_bringup/urdf/` and `ros2_ws/src/robot_sim_bringup/worlds/`
+- [x] T006 [P] Add the headless server-only launch and `ros_gz_bridge` YAML configuration in `ros2_ws/src/robot_sim_bringup/launch/` and `ros2_ws/src/robot_sim_bringup/config/ros_gz_bridge.yaml`
 - [ ] T007 Implement bounded readiness checks for `/clock`, TF connectivity, localization, sensor freshness, and Nav2 lifecycle in `ros2_ws/src/navigation_evaluation/src/ready_check.cpp`
 - [ ] T008 Add run-level metadata and artifact versioning for the Gazebo execution profile in `ros2_ws/src/navigation_evaluation/include/navigation_evaluation/` and `ros2_ws/src/navigation_evaluation/src/`
 

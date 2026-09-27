@@ -1,0 +1,36 @@
+profile_id: "gui-default"
+simulator: "Gazebo Harmonic"
+ros_distribution: "jazzy"
+mode: "graphical"
+resource_profile:
+  cpu_cores_min: 4
+  memory_gb_min: 16
+  disk_free_gb_min: 5
+  gpu_required: false
+readiness:
+  clock_progress_timeout_s: 20.0
+  startup_timeout_s: 120.0
+  localization_required: true
+  nav2_required: true
+  tf_required: true
+world:
+  name: "low_resource_world"
+  file: "worlds/low_resource_world.sdf"
+  physics: "ode"
+robot:
+  name: "mobile_manipulator"
+  urdf: "urdf/mobile_manipulator.urdf"
+  sensor_frames:
+    - "base_link"
+    - "lidar_link"
+    - "imu_link"
+bridge:
+  clock_topic: "/clock"
+  odom_topic: "/odom"
+  scan_topic: "/scan_raw"
+  imu_topic: "/imu/data"
+  tf_topic: "/tf"
+known_limits:
+  realtime_factor_not_required: true
+  visual_rendering_optional: true
+  headless_mode_available_as_override: true

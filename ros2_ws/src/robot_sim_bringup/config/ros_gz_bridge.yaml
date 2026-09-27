@@ -1,0 +1,29 @@
+- ros_topic_name: "/clock"
+  gz_topic_name: "/clock"
+  ros_type: "rosgraph_msgs/msg/Clock"
+  gz_type: "gz.msgs.Clock"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/odom"
+  gz_topic_name: "/model/mobile_manipulator/odometry"
+  ros_type: "nav_msgs/msg/Odometry"
+  gz_type: "gz.msgs.Odometry"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/scan_raw"
+  gz_topic_name: "/lidar/scan"
+  ros_type: "sensor_msgs/msg/LaserScan"
+  gz_type: "gz.msgs.LaserScan"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/imu/data"
+  gz_topic_name: "/imu"
+  ros_type: "sensor_msgs/msg/Imu"
+  gz_type: "gz.msgs.IMU"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/tf"
+  gz_topic_name: "/world/low_resource_world/pose/info"
+  ros_type: "tf2_msgs/msg/TFMessage"
+  gz_type: "gz.msgs.Pose_V"
+  direction: GZ_TO_ROS
