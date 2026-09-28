@@ -40,11 +40,16 @@ if(BUILD_TESTING)
   ament_add_gtest(test_artifact_store test/test_artifact_store.cpp)
   target_include_directories(test_artifact_store PRIVATE include)
   target_link_libraries(test_artifact_store navigation_evaluation_core)
+
+  ament_add_gtest(test_ready_check test/test_ready_check.cpp)
+  target_include_directories(test_ready_check PRIVATE include)
+  target_link_libraries(test_ready_check navigation_evaluation_core)
 endif()
 
 add_library(navigation_evaluation_core
   src/scenario.cpp
   src/artifact_store.cpp
+  src/ready_check.cpp
 )
 target_include_directories(navigation_evaluation_core PUBLIC include)
 target_link_libraries(navigation_evaluation_core yaml-cpp JsonCpp::JsonCpp)
