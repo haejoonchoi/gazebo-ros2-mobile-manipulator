@@ -53,7 +53,7 @@ ReadinessResult evaluate_readiness(
   result.failed_checks = failed_checks;
   if (failed_checks.empty()) {
     result.ready = true;
-    result.failure_summary = "ready";
+    result.failure_summary.clear();
     return result;
   }
 
