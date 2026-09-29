@@ -16,7 +16,7 @@ required:
 properties:
   profile_id:
     type: string
-    pattern: '^[a-z0-9]+(-[a-z0-9]+)*$'
+    pattern: "^[a-z0-9]+(-[a-z0-9]+)*$"
   simulator:
     const: Gazebo Harmonic
   ros_distribution:
@@ -28,10 +28,10 @@ properties:
     additionalProperties: false
     required: [cpu_cores_min, memory_gb_min, disk_free_gb_min, gpu_required]
     properties:
-      cpu_cores_min: {type: integer, minimum: 4}
-      memory_gb_min: {type: number, minimum: 16}
-      disk_free_gb_min: {type: number, minimum: 5}
-      gpu_required: {type: boolean, const: false}
+      cpu_cores_min: { type: integer, minimum: 4 }
+      memory_gb_min: { type: number, minimum: 16 }
+      disk_free_gb_min: { type: number, minimum: 5 }
+      gpu_required: { type: boolean, const: false }
   readiness:
     type: object
     additionalProperties: false
@@ -42,38 +42,45 @@ properties:
       - nav2_required
       - tf_required
     properties:
-      clock_progress_timeout_s: {type: number, exclusiveMinimum: 0, maximum: 20}
-      startup_timeout_s: {type: number, exclusiveMinimum: 0, maximum: 120}
-      localization_required: {type: boolean}
-      nav2_required: {type: boolean}
-      tf_required: {type: boolean}
+      clock_progress_timeout_s:
+        { type: number, exclusiveMinimum: 0, maximum: 20 }
+      startup_timeout_s: { type: number, exclusiveMinimum: 0, maximum: 120 }
+      localization_required: { type: boolean }
+      nav2_required: { type: boolean }
+      tf_required: { type: boolean }
   world:
     type: object
     required: [name, file, physics]
     properties:
-      name: {type: string, minLength: 1}
-      file: {type: string, minLength: 1}
-      physics: {type: string, minLength: 1}
+      name: { type: string, minLength: 1 }
+      file: { type: string, minLength: 1 }
+      physics: { type: string, minLength: 1 }
   robot:
     type: object
     required: [name, urdf, sensor_frames]
     properties:
-      name: {type: string, minLength: 1}
-      urdf: {type: string, minLength: 1}
-      sensor_frames: {type: array, minItems: 3, items: {type: string, minLength: 1}}
+      name: { type: string, minLength: 1 }
+      urdf: { type: string, minLength: 1 }
+      sensor_frames:
+        { type: array, minItems: 3, items: { type: string, minLength: 1 } }
   bridge:
     type: object
     required: [clock_topic, odom_topic, scan_topic, imu_topic, tf_topic]
     properties:
-      clock_topic: {type: string, pattern: '^/' }
-      odom_topic: {type: string, pattern: '^/' }
-      scan_topic: {type: string, pattern: '^/' }
-      imu_topic: {type: string, pattern: '^/' }
-      tf_topic: {type: string, pattern: '^/' }
+      clock_topic: { type: string, pattern: "^/" }
+      odom_topic: { type: string, pattern: "^/" }
+      scan_topic: { type: string, pattern: "^/" }
+      imu_topic: { type: string, pattern: "^/" }
+      tf_topic: { type: string, pattern: "^/" }
   known_limits:
     type: object
-    required: [realtime_factor_not_required, visual_rendering_optional, headless_mode_available_as_override]
+    required:
+      [
+        realtime_factor_not_required,
+        visual_rendering_optional,
+        headless_mode_available_as_override,
+      ]
     properties:
-      realtime_factor_not_required: {type: boolean}
-      visual_rendering_optional: {type: boolean}
-      headless_mode_available_as_override: {type: boolean}
+      realtime_factor_not_required: { type: boolean }
+      visual_rendering_optional: { type: boolean }
+      headless_mode_available_as_override: { type: boolean }
