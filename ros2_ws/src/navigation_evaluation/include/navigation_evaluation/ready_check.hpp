@@ -30,17 +30,31 @@ struct ReadinessRequirements
 struct ReadinessObservation
 {
   double clock_progress_s{0.0};
+  double clock_elapsed_s{0.0};
+  double tf_elapsed_s{0.0};
+  double localization_elapsed_s{0.0};
+  double sensor_elapsed_s{0.0};
+  double nav2_elapsed_s{0.0};
+  unsigned int clock_publisher_count{0};
   bool tf_connected{false};
   bool localization_ready{false};
-  bool sensor_fresh{false};
+  bool raw_lidar_fresh{false};
+  bool impaired_lidar_fresh{false};
+  bool imu_fresh{false};
+  std::string imu_frame_id;
   bool nav2_ready{false};
+  bool reset_services_ready{false};
+  bool execution_profile_valid{false};
+  bool resource_profile_supported{false};
 };
 
 struct ReadinessResult
 {
   bool ready{false};
+  bool timed_out{false};
   std::vector<std::string> failed_checks;
   std::string failure_summary;
+  std::string failure_class;
 };
 
 ReadinessResult evaluate_readiness(

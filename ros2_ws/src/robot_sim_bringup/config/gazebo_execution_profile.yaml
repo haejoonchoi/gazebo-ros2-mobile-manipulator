@@ -1,7 +1,7 @@
-profile_id: "gui-default"
+profile_id: "headless-low-resource"
 simulator: "Gazebo Harmonic"
 ros_distribution: "jazzy"
-mode: "graphical"
+mode: "server_only"
 resource_profile:
   cpu_cores_min: 4
   memory_gb_min: 16

@@ -51,6 +51,13 @@ TEST(HealthyRunner, RunsFromReadyToTerminalArtifact)
   input >> record;
   EXPECT_EQ(record["scenario_id"].asString(), "healthy");
   EXPECT_EQ(record["profile_id"].asString(), "headless-low-resource");
+  EXPECT_EQ(record["schema_version"].asInt(), 1);
+  EXPECT_EQ(record["environment"]["simulator"]["name"].asString(), "Gazebo Harmonic");
+  EXPECT_EQ(record["environment"]["execution_profile"]["id"].asString(), "headless-low-resource");
+  EXPECT_EQ(record["environment"]["execution_profile"]["mode"].asString(), "server_only");
+  EXPECT_GT(record["environment"]["host"]["logical_cpu_count"].asUInt(), 0U);
+  EXPECT_FALSE(record["environment"]["host"]["os"].asString().empty());
+  EXPECT_FALSE(record["environment"]["ros_distribution"].asString().empty());
   EXPECT_EQ(record["terminal_status"].asString(), "succeeded");
   EXPECT_EQ(record["duration_ms"].asInt64(), 1250);
 

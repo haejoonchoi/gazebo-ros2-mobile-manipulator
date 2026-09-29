@@ -42,7 +42,8 @@ public:
     std::string batch_id,
     std::string run_id,
     Scenario scenario,
-    std::string profile_id);
+    std::string profile_id,
+    std::string execution_mode = "server_only");
 
   void start_run();
   void mark_ready();
@@ -63,6 +64,7 @@ private:
   Scenario scenario_;
   std::string run_id_;
   std::string profile_id_;
+  std::string execution_mode_;
   std::string batch_id_;
   RunState state_{RunState::Created};
   std::string terminal_status_{"created"};

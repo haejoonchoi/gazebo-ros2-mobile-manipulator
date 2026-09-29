@@ -37,6 +37,13 @@ if(BUILD_TESTING)
     test_scenario_schema
     PRIVATE NAVIGATION_EVALUATION_TEST_FIXTURE_DIR="${CMAKE_CURRENT_SOURCE_DIR}/test/fixtures")
 
+  ament_add_gtest(test_execution_profile test/test_execution_profile.cpp)
+  target_include_directories(test_execution_profile PRIVATE include)
+  target_link_libraries(test_execution_profile navigation_evaluation_core)
+  target_compile_definitions(
+    test_execution_profile
+    PRIVATE NAVIGATION_EVALUATION_EXECUTION_PROFILE_PATH="${CMAKE_CURRENT_SOURCE_DIR}/../robot_sim_bringup/config/gazebo_execution_profile.yaml")
+
   ament_add_gtest(test_artifact_store test/test_artifact_store.cpp)
   target_include_directories(test_artifact_store PRIVATE include)
   target_link_libraries(test_artifact_store navigation_evaluation_core)
@@ -51,6 +58,7 @@ if(BUILD_TESTING)
 endif()
 
 add_library(navigation_evaluation_core
+  src/execution_profile.cpp
   src/scenario.cpp
   src/artifact_store.cpp
   src/ready_check.cpp

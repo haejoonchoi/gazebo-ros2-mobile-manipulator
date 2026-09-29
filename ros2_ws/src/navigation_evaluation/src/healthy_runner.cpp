@@ -13,7 +13,12 @@
 #include "navigation_evaluation/healthy_runner.hpp"
 
 #include <chrono>
+#include <cstdlib>
 #include <stdexcept>
+#include <thread>
+
+#include <sys/utsname.h>
+#include <unistd.h>
 
 namespace navigation_evaluation {
 namespace {
@@ -48,6 +53,39 @@ std::string state_name(RunState state)
   return "unknown";
 }
 
+std::string environment_value(const char *name, const char *fallback)
+{
+  const auto *value = std::getenv(name);
+  return value == nullptr || *value == '\0' ? fallback : value;
+}
+
+Json::Value run_environment(const std::string &profile_id, const std::string &execution_mode)
+{
+  Json::Value environment(Json::objectValue);
+  environment["simulator"]["name"] = "Gazebo Harmonic";
+  environment["simulator"]["version"] = environment_value("GZ_VERSION", "unknown");
+  environment["ros_distribution"] = environment_value("ROS_DISTRO", "unknown");
+  environment["execution_profile"]["id"] = profile_id;
+  environment["execution_profile"]["mode"] = execution_mode;
+  environment["host"]["logical_cpu_count"] = std::thread::hardware_concurrency();
+
+  struct utsname host_info {};
+  if (uname(&host_info) == 0) {
+    environment["host"]["os"] = host_info.sysname;
+    environment["host"]["os_release"] = host_info.release;
+  } else {
+    environment["host"]["os"] = "unknown";
+    environment["host"]["os_release"] = "unknown";
+  }
+
+  const long page_count = sysconf(_SC_PHYS_PAGES);
+  const long page_size = sysconf(_SC_PAGESIZE);
+  if (page_count > 0 && page_size > 0) {
+    environment["host"]["memory_bytes"] = Json::UInt64(page_count) * Json::UInt64(page_size);
+  }
+  return environment;
+}
+
 }  // namespace
 
 HealthyRunner::HealthyRunner(
@@ -55,11 +93,13 @@ HealthyRunner::HealthyRunner(
   std::string batch_id,
   std::string run_id,
   Scenario scenario,
-  std::string profile_id)
+  std::string profile_id,
+  std::string execution_mode)
 : artifact_store_(root, batch_id, run_id),
   scenario_(std::move(scenario)),
   run_id_(std::move(run_id)),
   profile_id_(std::move(profile_id)),
+  execution_mode_(std::move(execution_mode)),
   batch_id_(std::move(batch_id))
 {
   if (run_id_.empty()) {
@@ -91,6 +131,7 @@ void HealthyRunner::start_run()
   metadata.created_at = timestamp_seconds();
   metadata.created_at_clock_domain = "wall";
   metadata.clock_segment = 0;
+  metadata.environment = run_environment(profile_id_, execution_mode_);
   artifact_store_.create_partial_run(metadata);
   append_state_event("run.lifecycle", state_name(state_));
 }
